@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import com.mysql.jdbc.PreparedStatement;
 import Models.Compte;
@@ -12,7 +13,7 @@ import Serveur.ICompteMetier;
 public class CompteMetier extends UnicastRemoteObject implements ICompteMetier {
 
 	private Connection con=null;
-	private PreparedStatement st=null;
+	private java.sql.PreparedStatement st=null;
 	private ResultSet rs=null; 
 	public CompteMetier() throws RemoteException {
 		super();
@@ -27,7 +28,16 @@ public class CompteMetier extends UnicastRemoteObject implements ICompteMetier {
 
 	@Override
 	public void ajouter(Compte c) throws RemoteException {
-		// TODO Auto-generated method stub
+		try {
+		st=con.prepareStatement("insert into Compte (NumCp,TypeCp,Solde) value (?,?,?)");
+		st.setInt(1, c.getNumCP());
+		st.setString(2, c.getTypeCp());
+		st.setInt(3, c.getSolde());
+		st.executeUpdate();
+		}catch(SQLException e) 
+		{
+			System.out.println(e.getMessage());
+		}
 		
 	}
 
