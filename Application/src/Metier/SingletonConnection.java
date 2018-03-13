@@ -10,7 +10,7 @@ private static Connection connection;
 static {
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
-		connection=DriverManager.getConnection("jdbc:mysq://localhost:3306/Banque","root","");
+		connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/Banque","root","");
 	}
 	catch(ClassNotFoundException ex)
 	{

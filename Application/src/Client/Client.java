@@ -8,7 +8,7 @@ public class Client {
 		//double solde;
 		try
 		{
-			obj =(ICompte)Naming.lookup("rmi://localhost:1095/HelloServer");
+			obj =(ICompte)Naming.lookup("rmi://localhost:3306/Banque");
 			obj.crediter(2000);
 			obj.debiter(1000);
 			System.out.println(obj.Lire_Solde());
