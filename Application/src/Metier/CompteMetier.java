@@ -43,7 +43,24 @@ public class CompteMetier extends UnicastRemoteObject implements ICompteMetier {
 
 	@Override
 	public void RechercheparNumC(int code) throws RemoteException {
-		// TODO Auto-generated method stub
+		Compte c=null;
+		try
+		{
+			st=con.prepareStatement("Select * From Compte Where NumCp=?");
+			st.setInt(1, code);
+			rs=st.executeQuery();
+			if(rs.next())
+			{
+				c=new Compte();
+				c.setNumCP(rs.getInt("NumCp"));
+				c.setTypeCp(rs.getString("TypeCp"));
+				c.setSolde(rs.getInt("Solde"));
+			}
+				}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
 		
 	}
 
